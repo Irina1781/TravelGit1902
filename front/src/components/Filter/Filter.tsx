@@ -26,19 +26,16 @@ const Filter: FC<FilterInterface> = ({ handleSearch }) => {
     console.log('request', request);
 
 
-    //чуть позже вынести в другой файл
     const handleUpdate = async () => {
         try {
-            // const response = await axios.get("http://localhost:3000/search", {
-            //     params: {
-            //         departureCity: request.departureCity,
-            //          typeRest: request.typeRest
-            //      }
-            // });
-            // const data = response?.data ?? [];
+            const response = await axios.get("http://localhost:3000/getResult", {
+                params: {
+                    types: type.map(item => item.id),
+                    city: city?.id,
+                }
+            })
+            handleSearch(response.data)
 
-            const response = await axios.get("http://localhost:3000/getResult") 
-            return [];
         } catch (error) {
             console.error("Ошибка извлечения данных: ", error);
         }

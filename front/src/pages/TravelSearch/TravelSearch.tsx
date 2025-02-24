@@ -8,9 +8,11 @@ export const TravelSearch = () => {
     const [resultData, setResultData ] = useState<any>([]);
 
     const handleSearch = (dataFromServer: any) => {
+
         setResultData(dataFromServer);
     }
 
+    console.log('result', resultData);
     return (
         <div className="App">
           <h1>Найдите свое путешествие!</h1>
