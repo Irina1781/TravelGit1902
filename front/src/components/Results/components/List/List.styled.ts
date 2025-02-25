@@ -7,7 +7,9 @@ export const Listcontainer = styled.div`
     gap: 20px;
 `
 export const CardContainer = styled.div`
-    border: 1px solid grey;
+    display: flex;
+    flex-direction: column;    
+    border: 1px solid #DFAF2B;
     padding: 15px;
     border-radius: 5px;
     text-align:left;

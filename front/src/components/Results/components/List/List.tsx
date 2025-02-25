@@ -9,35 +9,37 @@ const List = ({ results }) => {
         <Listcontainer>
             {results.map((result, index) => (
                 <CardContainer key={index}>
-                    <img src={result?.photo} style={{width:500, alignItems:"center", flex: 1}}/>
-                    <br />
+                    <div className="Img">
+                    <img src={result?.photo} style={{width:490}}/>
+                    <br /></div>
+                    <div className="Text">
                     <strong>
                         Название: {result.name}
                     </strong>
-                    <br />
+                    <br /><br />
                     <strong>
                         Города вылета: {result.city.join(', ')}
                     </strong>
-                    <br />
+                    <br /><br />
                     {result.description}
-                    <br />
+                    <br /> <br />
                     <strong>
-                        Географическое положение: {result.geo}
+                       Географическое положение: {result.geo}
                     </strong>
-                    <br />
+                    <br /><br />
                     <strong>
                        Климат: {result.climate}
                     </strong>
-                    <br />
+                    <br /><br />
                     <strong>
                        Часовой пояс: {result.timezone}
                     </strong>
-                    <br />
+                    <br /><br />
                     <strong>
                        Минимальная стоимость перелёта (туда-обратно): {result.cost +' руб.'}
                     </strong>
-                    <br />
-                    <Button src={result.more} target="_blank" styles={'w-full bg-violet-500'}> Подробнее </Button>
+                    <br /><br />
+                    <a href={result?.more} className="Button" target="_blank"> Подробнее </a></div>
                 </CardContainer>
             ))}
         </Listcontainer>

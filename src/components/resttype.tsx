@@ -16,6 +16,8 @@ type Type = {
   color: string;
 };
 
+
+
 const Controls = styled.div`
   display: flex;
   gap: 10px;

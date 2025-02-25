@@ -27,42 +27,7 @@ db.sequelize.authenticate()
   .catch(err => {
     console.error('Unable to connect to the database:', err);
   });
-
  
-//  try {
-//   const result = await travel.findAll({ where: {city: departureCity, type: typeRest } });
-//   res.json(result);
-//   } catch (error) {
-//   console.error('Ошибка при получении данных:', error);
-//   res.status(500).json({ message: 'Ошибка сервера', error });
-//  }
-
-// console.log(req.query,departureCity,typeRest);
-//   res.json([]);
-// });
-
-// app.post("/getResult", async (req, res) => {
-//   try {
-//   const result = await travel.findAll({ where: {city: departureCity, type: typeRest } });
-//   res.json(result);
-//   } catch (error) {
-//   console.error('Ошибка при получении данных:', error);
-//   res.status(500).json({ message: 'Ошибка сервера', error });
-//  }
-//   }
-// );
-
-// app.get("/getResult", async (req, res) => {
-//   const transaction = await db.sequelize.transaction();
-//   const travel = await db.travel.findAll({ 
-//       transaction
-//  });
-//  console.log(travel);
-//  res.json(travel);
-//  }
-// );
-// 
-
 app.get("/getResult", async (req, res) => {
   console.log(req.query?.types);
   try {

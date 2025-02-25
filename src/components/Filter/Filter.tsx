@@ -26,16 +26,17 @@ const Filter: FC<FilterInterface> = ({ handleSearch }) => {
     console.log('request', request);
 
 
+    //чуть позже вынести в другой файл
     const handleUpdate = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/getResult", {
+            const response = await axios.get("http://localhost:3000/search", {
                 params: {
-                    types: type.map(item => item.id),
-                    city: city?.id,
-                }
-            })
-            handleSearch(response.data)
-
+                    departureCity: request.departureCity,
+                     typeRest: request.typeRest
+                 }
+            });
+            // const data = response?.data ?? [];
+            return [];
         } catch (error) {
             console.error("Ошибка извлечения данных: ", error);
         }
@@ -65,8 +66,8 @@ const Filter: FC<FilterInterface> = ({ handleSearch }) => {
         <>
         <div className="App">
             <h4>Выберите параметры из списка</h4>
-            <S.Controls className="Dropdown">
-                <Dropdown<CityType> 
+            <S.Controls>
+                <Dropdown<CityType>
                     behaviour={Behaviour.SINGLE}
                     value={city}
                     onChange={setCity}
@@ -91,8 +92,9 @@ const Filter: FC<FilterInterface> = ({ handleSearch }) => {
                 </Dropdown>
             </S.Controls>
         </div>
-        <Button className="Button"
-             onClick={handleUpdate}            
+        <Button
+             onClick={handleUpdate}
+            //  disabled={!city || !type}
         >
             Найти
         </Button>

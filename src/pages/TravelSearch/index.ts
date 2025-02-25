@@ -1,3 +1,2 @@
 import { TravelSearch } from './TravelSearch';
-
-export { TravelSearch};
+export { TravelSearch };

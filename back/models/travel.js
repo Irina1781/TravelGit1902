@@ -8,47 +8,47 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
         name: {
-            type: DataTypes.TEXT, // Предполагаю, что имя пользователя - строка
-            allowNull: false,       // Или true, если может быть NULL
+            type: DataTypes.TEXT, 
+            allowNull: false,      
         },
         photo: {
-            type: DataTypes.TEXT, // Предполагаю, что имя таблицы - строка
-            allowNull: false,        // Или true, если может быть NULL
+            type: DataTypes.TEXT, 
+            allowNull: false,       
         },
         description: {
-            type: DataTypes.TEXT, // Предполагаю, что имя аккаунта - строка
-            allowNull: false,       // Или true, если может быть NULL
+            type: DataTypes.TEXT, 
+            allowNull: false,      
         },
         geo: {                  
             type: DataTypes.TEXT, 
-            allowNull: false, // Не должно быть NULL для связи
+            allowNull: false, 
             
         },
         type: {                  
             type: DataTypes.INTEGER, 
-            allowNull: false, // Не должно быть NULL для связи
+            allowNull: false, 
             
         },
         climate: {                  
             type: DataTypes.INTEGER, 
-            allowNull: false, // Не должно быть NULL для связи           
+            allowNull: false,         
         },
         timezone: {                  
             type: DataTypes.INTEGER, 
-            allowNull: false, // Не должно быть NULL для связи           
+            allowNull: false,          
         },
         cost: {                  
             type: DataTypes.INTEGER, 
-            allowNull: false, // Не должно быть NULL для связи
+            allowNull: false, 
            
         },
         city: {                  
             type: DataTypes.ARRAY(DataTypes.TEXT), 
-            allowNull: false, // Не должно быть NULL для связи
+            allowNull: false, 
                     },
         more: {                  
             type: DataTypes.TEXT, 
-            allowNull: false, // Не должно быть NULL для связи            
+            allowNull: false,           
         },
     },{freezeTableName: true, timestamps: false,}
 );
