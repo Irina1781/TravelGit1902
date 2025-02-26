@@ -1,10 +1,32 @@
 import React from "react";
 import { CardContainer, Listcontainer } from './List.styled';
 import { Button } from "react-bootstrap";
-const List = ({ results }) => {
+
+const List = ({ results, climate, timezone}) => {
     if (!results?.length || !Array.isArray(results)) {
         return <p>Ничего не найдено.</p>;
     }
+
+    const getClimateName = (id) => {
+        if (climate?.length) {
+            const nameClimate = climate.find(item => item.id === id);
+            if (nameClimate?.climate) {
+                return nameClimate.climate
+            }
+        }
+        return '-'
+    }
+
+    const getTimezoneName = (id) => {
+        if (timezone?.length) {
+            const nameTimezone = timezone.find(item => item.id === id);
+            if (nameTimezone?.timezone) {
+                return nameTimezone.timezone
+            }
+        }
+        return '-'
+    }
+
     return (
         <Listcontainer>
             {results.map((result, index) => (
@@ -28,11 +50,11 @@ const List = ({ results }) => {
                     </strong>
                     <br /><br />
                     <strong>
-                       Климат: {result.climate}
+                       Климат: {getClimateName(result.climate)}
                     </strong>
                     <br /><br />
                     <strong>
-                       Часовой пояс: {result.timezone}
+                       Часовой пояс: {getTimezoneName(result.timezone)}
                     </strong>
                     <br /><br />
                     <strong>

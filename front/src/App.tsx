@@ -10,7 +10,6 @@ const handleSearch = (city, type) => {
     city: city,
     type: type,
   }).toString();
-
   window.location.href = `${apiUrl}?${searchParams}`;
 };
 

@@ -5,7 +5,7 @@
 -- Dumped from database version 17.2
 -- Dumped by pg_dump version 17.2
 
--- Started on 2025-02-20 23:50:22
+-- Started on 2025-02-26 22:09:26
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -28,7 +28,7 @@ CREATE EXTENSION IF NOT EXISTS pldbgapi WITH SCHEMA public;
 
 
 --
--- TOC entry 4955 (class 0 OID 0)
+-- TOC entry 4962 (class 0 OID 0)
 -- Dependencies: 2
 -- Name: EXTENSION pldbgapi; Type: COMMENT; Schema: -; Owner: 
 --
@@ -39,6 +39,19 @@ COMMENT ON EXTENSION pldbgapi IS 'server-side support for debugging PL/pgSQL fun
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
+
+--
+-- TOC entry 227 (class 1259 OID 26511)
+-- Name: city; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.city (
+    id integer NOT NULL,
+    city text NOT NULL
+);
+
+
+ALTER TABLE public.city OWNER TO postgres;
 
 --
 -- TOC entry 224 (class 1259 OID 16551)
@@ -102,7 +115,23 @@ CREATE TABLE public.travel_search (
 ALTER TABLE public.travel_search OWNER TO postgres;
 
 --
--- TOC entry 4947 (class 0 OID 16551)
+-- TOC entry 4956 (class 0 OID 26511)
+-- Dependencies: 227
+-- Data for Name: city; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.city (id, city) FROM stdin;
+1	Москва
+2	Санкт-Петербург
+3	Новосибирск
+4	Екатеринбург
+5	Сочи
+6	Владивосток
+\.
+
+
+--
+-- TOC entry 4953 (class 0 OID 16551)
 -- Dependencies: 224
 -- Data for Name: climate; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -120,7 +149,7 @@ COPY public.climate (id, climate) FROM stdin;
 
 
 --
--- TOC entry 4948 (class 0 OID 16558)
+-- TOC entry 4954 (class 0 OID 16558)
 -- Dependencies: 225
 -- Data for Name: rest_type; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -137,7 +166,7 @@ COPY public.rest_type (id, type) FROM stdin;
 
 
 --
--- TOC entry 4946 (class 0 OID 16544)
+-- TOC entry 4952 (class 0 OID 16544)
 -- Dependencies: 223
 -- Data for Name: timezone; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -174,13 +203,12 @@ COPY public.timezone (id, timezone) FROM stdin;
 
 
 --
--- TOC entry 4949 (class 0 OID 16643)
+-- TOC entry 4955 (class 0 OID 16643)
 -- Dependencies: 226
 -- Data for Name: travel_search; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.travel_search (id, name, photo, description, geo, type, climate, timezone, cost, city, more) FROM stdin;
-1	Райлей	https://www.sunny-trip.ru/wp-content/uploads/2018/01/thailand.jpg	Тайский райский полуостров Райлей знаменит своими поражающими воображение пляжами и «вырастающими» из морских вод скалами-островами. Белоснежный песок, прозрачная вода и поразительная красота природы вокруг-отдых станет поистине незабываемы	Таиланд, провинция Краби	1	6	21	69170	{'Москва,Санкт-Петербург,Екатеринбург,Новосибирск'}	https://www.sunny-trip.ru/railay/
 2	Эль-Нидо	https://www.sunny-trip.ru/wp-content/uploads/2017/01/DSCN6881.jpg	Здесь одни из самых красивых пляжей, потрясающие лагуны, острова-скалы и пышная тропическая растительность. Эль-Нидо — одно из самых красивых мест планеты	Филиппины, остров Палаван	1	6	20	78663	{'Москва,Санкт-Петербург,Екатеринбург,Новосибирск,Сочи'}	https://www.sunny-trip.ru/el-nido/
 3	Чиангмай	https://www.sunny-trip.ru/wp-content/uploads/2019/02/DSCN8419.jpg	Основанный в конце XIII века князем Менграй город иначе как столицей храмов и не назовешь. Они здесь на каждом углу: большие и маленькие, высокие и очень высокие, серебристые, белые, красные, черные…	Таиланд, провинция Чианг Май	5	5	20	49467	{'Москва'}	https://www.sunny-trip.ru/chiang-mai/
 4	Пхукет	https://www.sunny-trip.ru/wp-content/uploads/2019/01/DSCN7245.jpg	Популярный среди россиян остров Пхукет с одноименной столицей расположен на самом юге Таиланда, южнее материкового перешейка, заключенного границами в объятия Мьянмы и Малайзии. Провинция Пхукет, состоящая из самого острова и еще порядка 30-32 более мелких островков, соседствует с тайскими провинциями Пхангнга и Краби. Омывается прозрачными водами Андаманского моря	Таиланд, остров на юге Таиланда	1	5	20	46856	{'Москва,Новосибирск'}	https://www.sunny-trip.ru/phuket/
@@ -203,22 +231,32 @@ COPY public.travel_search (id, name, photo, description, geo, type, climate, tim
 21	Хошимин	https://www.sunny-trip.ru/wp-content/uploads/2017/01/IMG_20160618_102410.jpg	Хошимин (бывший Сайгон) расположен в дельте самой большой и полноводной реки Азии – Меконга. Наиболее популярные экскурсии проходят в центре города с его достопримечательностями, на реке Меконг и в партизанских туннелях	Вьетнам, юг	5	6	20	47617	{'Москва'}	https://www.sunny-trip.ru/ho-chi-minh/
 22	Манила	https://www.sunny-trip.ru/wp-content/uploads/2017/01/DSCN6238.jpg	Столица Филиппин Манила — город крайне неоднозначный, но здесь есть что посмотреть. Сочетание азиатского колорита и католицизма, нищеты  и блеска. Достопримечательности Манилы стоит посмотреть хотя бы раз в жизни	Филиппины, провинция Манила	5	6	21	46162	{'Москва'}	https://www.sunny-trip.ru/manila/
 23	Боракай	https://www.sunny-trip.ru/wp-content/uploads/2017/01/DSCN6422.jpg	Хотите на одни из лучших пляжей мира с белоснежным песком и прозрачной водой? Тогда Вам точно стоит посетить остров Боракай!\nБоракай – жемчужина Филиппин, остров с восхитительной красоты пляжами	Филиппины, остров, провинция Аклан	1	5	21	81970	{'Москва'}	https://www.sunny-trip.ru/boracay/
-24	Лангкави	https://www.sunny-trip.ru/wp-content/uploads/2016/12/DSCN4156.jpg	Лангкави (Langkawi Island) находится в Андаманском море на границе с Таиландом. Это одна из самых северных точек Малайзии.\nЛангкави – это не один остров, это архипелаг из россыпи более чем 100 островов. Самый большой из них тоже называется Лангкави (Pulau Langkawi). Как с земли, так и с высоты птичьего полета остров просто восхищает: кристально-голубые воды моря омывают сушу, покрытую горами и ярко-зеленой растительностью, а над белоснежными пляжами гордо реет местный вид красных орлов (langkawi), который и дал архипелагу свое название, он же является символом острова	Малайзия, архипелаг штата кедах	1	7	21	76312	{'Москва'}	https://www.sunny-trip.ru/langkawi/
 25	Куала-Лумпур	https://www.sunny-trip.ru/wp-content/uploads/2016/12/DSCN6161.jpg	Куала-Лумпур - столица Малайзии, город небоскребов, смешения религий, образов жизни и менталитета. Продвинутые технологии соседствуют с древними пещерными храмами и культурными памятниками. Здесь определенно есть что посмотреть!	Малайзия, столица	5	7	21	47659	{'Москва'}	https://www.sunny-trip.ru/malaysia
 26	Бали	https://www.sunny-trip.ru/wp-content/uploads/2017/01/DSCN5610.jpg	Чудо-остров с разноцветными пляжами и райскими местечками для разных видов отдыха. А еще потрясающей культурой с индуистскими храмами и древней архитектурой	Индонезия, группа Малых Зондских островов	1	7	21	6326	{'Москва'}	https://www.sunny-trip.ru/bali/
 27	Менорка	https://ic.pics.livejournal.com/sunny_trip_ru/80336492/40126/40126_800.jpg	Остров Менорка — один из семи Балеарских островов (см. статью Майорка). В нем удивительным образом переплелись история и архитектура Востока и Запада, сохранились древнейшие уникальные сооружения мегалитического периода.  Белоснежные виллы и удивительные по красоте песчаные пляжи, богатство флоры и фауны делают этот остров незаменимым для хорошего отдыха	Испания, Балеарские острова	1	1	14	66087	{'Москва'}	https://www.sunny-trip.ru/menorca/
 28	Майорка	https://www.sunny-trip.ru/wp-content/uploads/2017/03/DSCN5560.jpg	Майорка (Мальорка) – самый большой из Балеарских островов и самый большой остров в Испании. Он находится в Средиземном море к востоку от берегов Пиренейского полуострова. Балеарский архипелаг состоит из семи островов и двух групп: Сосновые острова – Ибица и Форментера, а также Гимнессийские острова —  Майорка (Insula Maior, «больший остров»), Менорка (Insula Menor или «меньший остров»), Драгонера, остров Воздуха и архипелаг Кабрера из маленьких островков	Испания, Балеарские острова	1	1	14	43355	{'Москва'}	https://www.sunny-trip.ru/mallorca/
 29	Санторини	https://www.sunny-trip.ru/wp-content/uploads/2017/02/ia-santorini.jpg	Греческий рай, остров Санторини, привлекает внимание путешественников своей уникальной атмосферой, архитектурой, вулканическими пляжами и глубоко-синими водами Эгейского моря. А еще загадками утерянной цивилизации. Ведь не зря остров считают погибшей Атлантидой	Греция, остров архипелага Киклады	5	1	15	42884	{'Москва'}	https://www.sunny-trip.ru/santorini/
 30	Крит	https://www.sunny-trip.ru/wp-content/uploads/2017/02/DSCN1400.jpg	Во время посещения греческого Крита стоит увидеть древние археологические памятники. Одна из самых интересных — экскурсия в колыбель минойской цивилизации, дворец  царя Миноса в Кноссе	Греция, остров Крит	6	1	15	38916	{'Москва'}	https://www.sunny-trip.ru/knossos/
-31	Доминикана	https://ic.pics.livejournal.com/sunny_trip_ru/80336492/17934/17934_800.jpg	Доминикана – это пляжи с белоснежным песком, обрамленным стройными или изгибающимися над волнами синего моря кокосовыми пальмами.\nВ Доминикане можно полюбоваться на водопады и китов, заняться виндсерфингом и дайвингом, совершить прогулку по средневековым улицам Санто-Доминго или покататься на лошадях, попробовать свежие морские деликатесы и фрукты, в тени пальм насладиться океанскими закатами и россыпями ярких звезд на ночном небе.	Доминиканская республика, остров Гаити	1	5	9	116789	{'Москва'}	https://www.sunny-trip.ru/dominican-republic/
 32	Тунис	https://www.sunny-trip.ru/wp-content/uploads/2017/03/Dougga-Tunusia.jpg	Тунис знаменит как пляжами, так и руинами древней римской и карфагенской цивилизаций. История страны открывается во время путешествия по ее просторам	Тунис, северная Африка	6	1	14	52334	{'Москва'}	https://www.sunny-trip.ru/tunisia/
 33	Санкт-Петербург	https://www.sunny-trip.ru/wp-content/uploads/2017/04/petergof.jpg	Город дворцов и парков, фонтанов и каналов, удивительных образцов российской скульптуры, архитектуры и изобразительного искусства XVIII-XIX вв., столица Российской империи — Санкт-Петербург — вызывает удивление и восхищение своих гостей и жителей	Россия, Санкт-Петербург	5	3	16	4099	{'Москва,Екатеринбург,Новосибирск,Сочи'}	https://www.sunny-trip.ru/saint-peterburg/
 34	Казань	https://www.sunny-trip.ru/wp-content/uploads/2017/03/Kazan.jpg	Столица Татарстана и один из крупнейших городов Поволжья, Казань, представляет собой настоящий сплав религий, культур и традиций	Россия, Татарстан	2	3	16	4530	{'Москва,Санкт-Петербург,Екатеринбург,Сочи'}	https://www.sunny-trip.ru/kazan/
+1	Райлей	https://www.sunny-trip.ru/wp-content/uploads/2018/01/thailand.jpg	Тайский райский полуостров Райлей знаменит своими поражающими воображение пляжами и «вырастающими» из морских вод скалами-островами. Белоснежный песок, прозрачная вода и поразительная красота природы вокруг-отдых станет поистине незабываемым	Таиланд, провинция Краби	1	6	21	69170	{'Москва,Санкт-Петербург,Екатеринбург,Новосибирск'}	https://www.sunny-trip.ru/railay/
+24	Лангкави	https://www.sunny-trip.ru/wp-content/uploads/2016/12/DSCN4156.jpg	Лангкави (Langkawi Island) находится в Андаманском море на границе с Таиландом. Это одна из самых северных точек Малайзии.\nЛангкави – не один остров, это архипелаг из россыпи более чем 100 островов. Самый большой из них тоже называется Лангкави (Pulau Langkawi). Как с земли, так и с высоты птичьего полета остров восхищает: кристально-голубые воды моря омывают сушу, покрытую горами и ярко-зеленой растительностью, а над белоснежными пляжами гордо реет местный вид красных орлов (langkawi), который и дал архипелагу свое название.	Малайзия, архипелаг штата Кедах	1	7	21	76312	{'Москва'}	https://www.sunny-trip.ru/langkawi/
+31	Доминикана	https://ic.pics.livejournal.com/sunny_trip_ru/80336492/17934/17934_800.jpg	Доминикана – это пляжи с белоснежным песком, обрамленным стройными или изгибающимися над волнами синего моря кокосовыми пальмами.\nЗдесь можно полюбоваться на водопады и китов, заняться виндсерфингом и дайвингом, совершить прогулку по средневековым улицам Санто-Доминго или покататься на лошадях, в тени пальм насладиться океанскими закатами и россыпями ярких звезд на ночном небе.	Доминиканская республика, остров Гаити	1	5	9	116789	{'Москва'}	https://www.sunny-trip.ru/dominican-republic/
 \.
 
 
 --
--- TOC entry 4793 (class 2606 OID 25682)
+-- TOC entry 4803 (class 2606 OID 26517)
+-- Name: city city_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.city
+    ADD CONSTRAINT city_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4797 (class 2606 OID 25682)
 -- Name: climate climate_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -227,7 +265,7 @@ ALTER TABLE ONLY public.climate
 
 
 --
--- TOC entry 4795 (class 2606 OID 25025)
+-- TOC entry 4799 (class 2606 OID 25025)
 -- Name: rest_type rest_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -236,7 +274,7 @@ ALTER TABLE ONLY public.rest_type
 
 
 --
--- TOC entry 4791 (class 2606 OID 25669)
+-- TOC entry 4795 (class 2606 OID 25669)
 -- Name: timezone timezone_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -245,7 +283,7 @@ ALTER TABLE ONLY public.timezone
 
 
 --
--- TOC entry 4797 (class 2606 OID 24858)
+-- TOC entry 4801 (class 2606 OID 24858)
 -- Name: travel_search travel_search_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -254,7 +292,7 @@ ALTER TABLE ONLY public.travel_search
 
 
 --
--- TOC entry 4798 (class 2606 OID 26409)
+-- TOC entry 4804 (class 2606 OID 26643)
 -- Name: travel_search climate; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -263,7 +301,7 @@ ALTER TABLE ONLY public.travel_search
 
 
 --
--- TOC entry 4799 (class 2606 OID 26404)
+-- TOC entry 4805 (class 2606 OID 26638)
 -- Name: travel_search rest_type; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -272,7 +310,7 @@ ALTER TABLE ONLY public.travel_search
 
 
 --
--- TOC entry 4800 (class 2606 OID 26414)
+-- TOC entry 4806 (class 2606 OID 26648)
 -- Name: travel_search timezone; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -280,7 +318,7 @@ ALTER TABLE ONLY public.travel_search
     ADD CONSTRAINT timezone FOREIGN KEY (timezone) REFERENCES public.timezone(id) NOT VALID;
 
 
--- Completed on 2025-02-20 23:50:23
+-- Completed on 2025-02-26 22:09:27
 
 --
 -- PostgreSQL database dump complete

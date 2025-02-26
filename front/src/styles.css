@@ -19,6 +19,17 @@ body {
   text-align: center; 
 }
 
+.Button1 {
+  background-color: #DFAF2B;
+  margin-left: 10px;
+  margin-top: 20px;
+  border: 1px solid lightgrey;
+  font: 15px;
+  color: #fff;
+  padding: 7px;
+  text-decoration: none;
+  text-align: center; 
+}
 .Dropdown {
  color: #DFAF2B;
 }

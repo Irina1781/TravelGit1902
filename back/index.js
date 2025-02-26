@@ -28,6 +28,25 @@ db.sequelize.authenticate()
     console.error('Unable to connect to the database:', err);
   });
  
+  app.get("/getClimateList", async (req, res) => {
+    try {
+      const transaction = await db.sequelize.transaction();
+      try {
+        const climate = await db.climate.findAll();
+
+        res.json(climate);
+        await transaction.commit();
+      } catch (error) {
+        console.error("Error fetching travel data:", error);
+        await transaction.rollback();
+        res.status(500).json({ error: 'Failed to fetch travel data' });
+      }
+  
+    } catch (error) {
+      console.error("Error starting transaction:", error);
+      res.status(500).json({ error: 'Failed to start transaction' }); 
+    }
+  })
 app.get("/getResult", async (req, res) => {
   console.log(req.query?.types);
   try {

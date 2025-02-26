@@ -6,12 +6,20 @@ import axios from "axios";
 import * as S from './Filter.styled';
 import Button from "react-bootstrap/Button";
 
+import { ClimateListProps } from '../../pages/TravelSearch/types';
 interface FilterInterface {
     handleSearch: (data: any) => void;
+    climateList: ClimateListProps;
 }
 
-const Filter: FC<FilterInterface> = ({ handleSearch }) => {
-    const [city, setCity] = useState<CityType>();
+import { TimezoneListProps } from '../../pages/TravelSearch/types';
+interface FilterInterface {
+    handleSearch: (data: any) => void;
+    timezoneList: TimezoneListProps;
+}
+
+const Filter: FC<FilterInterface> = ({ handleSearch, climateList, timezoneList }) => {
+    const [city, setCity] = useState<CityType>({ id: null, title: ''});
     const [type, setType] = useState<RestItemType[]>([]);
 
     const request = useMemo(() => {
@@ -45,6 +53,11 @@ const Filter: FC<FilterInterface> = ({ handleSearch }) => {
         const title = city ? `Город вылета: ${city.title}` : 'Город вылета: Выбрать';
         return <S.Label>{title}</S.Label>
     }, [city]);
+
+    const handleReset = () =>{
+        setType([]);
+        setCity({ id: null, title: ''});
+    }
 
     const typeLabel = useMemo(() => {
         return type.length ? (
@@ -95,6 +108,11 @@ const Filter: FC<FilterInterface> = ({ handleSearch }) => {
              onClick={handleUpdate}            
         >
             Найти
+        </Button>
+        <Button className="Button1"
+             onClick={handleReset}            
+        >
+            Очистить
         </Button>
     </>
     );
