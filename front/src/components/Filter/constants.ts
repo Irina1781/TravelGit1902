@@ -14,8 +14,16 @@ export const allCities: CityType[] = [
         title: "Екатеринбург",
     },
     {
-        id: 3,
+        id: 4,
         title: "Владивосток",
+    },
+    {
+        id: 5,
+        title: "Новосибирск",
+    },
+    {
+        id: 6,
+        title: "Сочи",
     },
 ];
 
